@@ -134,4 +134,6 @@ def find_registration_button_on_login_page(page_url, button_text):
 
 
 def format_function_signature(func_name: str, *func_args):
-    return f"{func_name.replace("_", " ").title()} [{", ".join(func_args)}]"
+    formatted = f"{func_name.replace("_", " ").title()} [{", ".join(func_args)}]"
+    print(formatted)
+    return formatted
