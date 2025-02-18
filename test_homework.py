@@ -6,7 +6,7 @@ import pytest
 @pytest.mark.parametrize(
     ("current_time", "expected_dark_theme"),
     [
-        (time(hour=6, minute=0), True),
+        (time(hour=6, minute=0), False),
         (time(hour=6, minute=1), False),
         (time(hour=21, minute=59), False),
         (time(hour=22, minute=0), True),
@@ -19,7 +19,7 @@ def test_dark_theme_by_time(current_time, expected_dark_theme):
     Протестируйте правильность переключения темной темы на сайте в зависимости от времени
     """
     # TODO переключите темную тему в зависимости от времени суток (с 22 до 6 часов утра - ночь)
-    is_dark_theme = current_time >= time(hour=22) or current_time <= time(hour=6)
+    is_dark_theme = current_time >= time(hour=22) or current_time < time(hour=6)
     assert is_dark_theme is expected_dark_theme
 
 
@@ -40,7 +40,7 @@ def test_dark_theme_by_time(current_time, expected_dark_theme):
         (False, time(hour=22, minute=1), False),
         (False, time(hour=5, minute=59), False),
         # ---
-        (None, time(hour=6, minute=0), True),
+        (None, time(hour=6, minute=0), False),
         (None, time(hour=6, minute=1), False),
         (None, time(hour=21, minute=59), False),
         (None, time(hour=22, minute=0), True),
@@ -61,7 +61,7 @@ def test_dark_theme_by_time_and_user_choice(
     # TODO переключите темную тему в зависимости от времени суток,
     #  но учтите что темная тема может быть включена вручную
     if dark_theme_enabled_by_user is None:
-        is_dark_theme = current_time >= time(hour=22) or current_time <= time(hour=6)
+        is_dark_theme = current_time >= time(hour=22) or current_time < time(hour=6)
     else:
         is_dark_theme = dark_theme_enabled_by_user
 
